@@ -9,6 +9,8 @@
 </script>
 
 <script>
+  import Portrait from '../components/Portrait.svelte';
+
   export let projects;
 </script>
 
@@ -30,3 +32,5 @@
     <li><a rel='prefetch' href='/{project.slug}'>{project.title}</a></li>
   {/each}
 </ul>
+
+<Portrait />
