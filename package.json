@@ -3,8 +3,11 @@
   "version": "3.0.0",
   "scripts": {
     "dev": "sapper dev",
-    "export": "sapper export",
-    "start": "serve __sapper__/export"
+    "build": "sapper build",
+    "start": "node __sapper__/build"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "dependencies": {
     "compression": "1.7.4",
