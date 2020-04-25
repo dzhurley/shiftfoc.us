@@ -121,27 +121,15 @@
       }
     });
   }
-
-  function handleResize() {
-    canvasRect = canvas.getBoundingClientRect();
-  }
 </script>
 
 <script>
   import { onMount } from 'svelte';
 
-  let canvas;
-
   onMount(() => {
     ctx = canvas.getContext('2d');
     canvasRect = canvas.getBoundingClientRect();
-    let frame;
-
-    (function loop() {
-      frame = requestAnimationFrame(loop);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      points.forEach(drawPoint);
-    }());
+    points = [];
 
     const img = new Image();
     img.onload = () => {
@@ -157,8 +145,21 @@
     };
     img.src = './me.png';
 
+    let frame;
+    (function loop() {
+      frame = requestAnimationFrame(loop);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      points.forEach(drawPoint);
+    }());
+
     return () => cancelAnimationFrame(frame);
   });
+
+  let canvas;
+
+  function handleResize() {
+    canvasRect = canvas.getBoundingClientRect();
+  }
 </script>
 
 <style>
