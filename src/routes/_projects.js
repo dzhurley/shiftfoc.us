@@ -51,8 +51,12 @@ export default [
     title: 'vorannoyed',
     summary: 'an annoyed explorer in a voronoi',
   },
-].map(({ title, summary }) => ({
-  title,
-  summary,
-  slug: title.replace(/ /g, '-'),
-}));
+].map(({ title, summary }) => {
+  const slug = title.replace(/ /g, '-');
+  return {
+    title,
+    summary,
+    slug,
+    url: `https://dzhurley.github.io/${slug}`,
+  };
+});

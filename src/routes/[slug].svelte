@@ -17,11 +17,32 @@
   export let project;
 </script>
 
+<style>
+  .info {
+    height: 2rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--light-color);
+  }
+
+  a {
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+
+  iframe {
+    width: 100vw;
+    height: calc(100vh - 4rem);
+    overflow: hidden;
+  }
+</style>
+
 <svelte:head>
-  <title>{project.title}</title>
+  <title>shiftfoc.us | {project.title}</title>
 </svelte:head>
 
-<a rel='prefetch' href='/'>back</a>
+<section class="info">
+  <a class="" rel="prefetch" href="/">ᐸ</a>
+  <strong>{project.title}</strong> - {project.summary}
+</section>
 
-<h1>{project.title}</h1>
-<p>{project.summary}</p>
+<iframe src={project.url} title={project.title} frameborder="0"></iframe>
