@@ -92,35 +92,6 @@
     }
   }
 
-  function handleMousemove({offsetX, offsetY}) {
-    const x = (offsetX / canvasRect.width) * w;
-    const y = (offsetY / canvasRect.height) * h;
-    points.forEach(p => {
-      const within = Math.sqrt(
-        Math.pow(p.xOrig - x, 2) + Math.pow(p.yOrig - y, 2),
-      );
-
-      if (within < buffer) {
-        const sub = {x: p.x - x, y: p.y - y};
-        const magnitude = Math.sqrt(sub.x * sub.x + sub.y * sub.y);
-
-        const scale = 1 + (buffer - magnitude) / buffer;
-        p.x = sub.x * scale + x;
-        p.y = sub.x + (sub.y - sub.x) * scale + y;
-
-        if (p.shape === 'circle') {
-          const index = Math.round(Math.random() * (mousedShapes.length - 1));
-          p.rotation = Math.random() * TWO_PI;
-          p.shape = mousedShapes[index];
-        }
-      } else {
-        p.x = p.xOrig;
-        p.y = p.yOrig;
-        p.rotation = Math.random() * TWO_PI;
-        p.shape = 'circle';
-      }
-    });
-  }
 </script>
 
 <script>
@@ -156,16 +127,58 @@
   });
 
   let canvas;
+  let hovered = false;
 
   function handleResize() {
     canvasRect = canvas.getBoundingClientRect();
+  }
+
+  function handleMousemove({offsetX, offsetY}) {
+    const x = (offsetX / canvasRect.width) * w;
+    const y = (offsetY / canvasRect.height) * h;
+    let wasWithin = false;
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      const within = Math.sqrt(
+        Math.pow(p.xOrig - x, 2) + Math.pow(p.yOrig - y, 2),
+      );
+
+      if (within < buffer) {
+        wasWithin = true;
+        const sub = {x: p.x - x, y: p.y - y};
+        const magnitude = Math.sqrt(sub.x * sub.x + sub.y * sub.y);
+
+        const scale = 1 + (buffer - magnitude) / buffer;
+        p.x = sub.x * scale + x;
+        p.y = sub.x + (sub.y - sub.x) * scale + y;
+
+        if (p.shape === 'circle') {
+          const index = Math.round(Math.random() * (mousedShapes.length - 1));
+          p.rotation = Math.random() * TWO_PI;
+          p.shape = mousedShapes[index];
+        }
+      } else {
+        hovered = false;
+        p.x = p.xOrig;
+        p.y = p.yOrig;
+        p.rotation = Math.random() * TWO_PI;
+        p.shape = 'circle';
+      }
+    }
+
+    hovered = wasWithin;
   }
 </script>
 
 <style>
   canvas {
-    max-width: 90vw;
-    max-height: 80vh;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .hovered {
+    cursor: pointer;
   }
 </style>
 
@@ -174,4 +187,5 @@
 <canvas
   bind:this={canvas}
   on:mousemove={handleMousemove}
+  class="{hovered ? 'hovered' : ''}"
 ></canvas>

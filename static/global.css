@@ -1,7 +1,24 @@
+@font-face{
+  font-family: 'DejaVuSansMono';
+  src: url('./DejaVuSansMono.ttf');
+}
+
+:root {
+    --light-color: #D7D7D7;
+    --dark-color: #272727;
+}
+
 body {
     margin: 0;
-    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-family: 'DejaVuSansMono', Helvetica Neue, sans-serif;
     font-size: 14px;
-    line-height: 1.5;
-    color: #333;
+    line-height: 2;
+    color: var(--light-color);
+    background-color: var(--dark-color);
+    overflow: hidden;
+}
+
+a {
+    color: var(--light-color);
+    text-decoration: none;
 }
