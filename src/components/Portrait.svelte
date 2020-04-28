@@ -8,38 +8,49 @@
   let points = [];
   let w, h, data;
 
+  function tweenSize(p) {
+    if (p.currentSize < p.size) {
+      p.currentSize += p.rate;
+    }
+    return p.currentSize;
+  }
+
   const drawShape = {
     star: p => {
+      const size = tweenSize(p);
       ctx.beginPath();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rotation);
-      ctx.moveTo(0, 0 - p.size * 2);
+      ctx.moveTo(0, 0 - size * 2);
       for (let i = 0; i < 5; i++) {
         ctx.rotate(Math.PI / 5);
-        ctx.lineTo(0, 0 - p.size);
+        ctx.lineTo(0, 0 - size);
         ctx.rotate(Math.PI / 5);
-        ctx.lineTo(0, 0 - p.size * 2);
+        ctx.lineTo(0, 0 - size * 2);
       }
       ctx.closePath();
       ctx.fill();
     },
     triangle: p => {
+      const size = tweenSize(p);
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rotation);
       const path = new Path2D();
-      path.moveTo(-p.size, p.size);
-      path.lineTo(p.size, p.size);
-      path.lineTo(-p.size / 2, -p.size);
+      path.moveTo(-size, size);
+      path.lineTo(size, size);
+      path.lineTo(-size / 2, -size);
       ctx.fill(path);
     },
     square: p => {
+      const size = tweenSize(p);
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rotation);
-      ctx.fillRect(-p.size, -p.size, p.size * 2, p.size * 2);
+      ctx.fillRect(-size, -size, size * 2, size * 2);
     },
     circle: p => {
+      const size = tweenSize(p);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, TWO_PI, true);
+      ctx.arc(p.x, p.y, size, 0, TWO_PI, true);
       ctx.fill();
       ctx.closePath();
     },
@@ -55,6 +66,8 @@
       y,
       yOrig: y,
       color,
+      currentSize: 0,
+      rate: Math.random() * 0.5 + 0.01,
       size: Math.random() * halfRes + (halfRes / 2),
       shape: 'circle',
       rotation: Math.random() * TWO_PI,
