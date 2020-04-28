@@ -16,15 +16,21 @@
 
 <style>
   .intro {
-    margin-left: 10vw;
-    padding-top: 10vh;
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
     max-width: 40vw;
+    pointer-events: none;
   }
 
   .projects {
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .projects a {
+    pointer-events: auto;
   }
 
   @media (min-width: 1000px) {
