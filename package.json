@@ -2,7 +2,7 @@
   "name": "shiftfoc.us",
   "version": "3.0.0",
   "scripts": {
-    "dev": "sapper dev",
+    "dev": "sapper dev -p 8080",
     "build": "sapper build",
     "start": "node __sapper__/build"
   },

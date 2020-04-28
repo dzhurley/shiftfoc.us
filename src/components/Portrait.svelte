@@ -1,8 +1,8 @@
 <script context="module">
   const TWO_PI = Math.PI * 2;
-  const res = 10;
+  const res = 16;
   const halfRes = res / 2;
-  const buffer = 20;
+  const buffer = 30;
 
   let ctx, canvasRect;
   let points = [];
@@ -55,7 +55,7 @@
       y,
       yOrig: y,
       color,
-      size: Math.random() * halfRes + halfRes,
+      size: Math.random() * halfRes + (halfRes / 2),
       shape: 'circle',
       rotation: Math.random() * TWO_PI,
     });
@@ -83,7 +83,7 @@
         red = data[pixelIndex + 0] || 0;
         green = data[pixelIndex + 1] || 0;
         blue = data[pixelIndex + 2] || 0;
-        alpha = data[pixelIndex + 3] > 0 ? 0.8 : 0;
+        alpha = data[pixelIndex + 3] > 0 ? 1 : 0;
 
         if (alpha) {
           addPoint(x, y, `rgba(${red},${green},${blue},${alpha})`);
@@ -91,7 +91,6 @@
       }
     }
   }
-
 </script>
 
 <script>
