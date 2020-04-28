@@ -18,10 +18,14 @@
 </script>
 
 <style>
-  .info {
-    height: 2rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--light-color);
+  .wrapper {
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    height: 6rem;
+    background-color: var(--dark-color);
+    display:flex;
+    align-items: center;
   }
 
   a {
@@ -30,8 +34,13 @@
   }
 
   iframe {
-    width: 100vw;
-    height: calc(100vh - 4rem);
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 6rem);
+    height: calc(100vh - 9rem);
+    border: 1px solid var(--light-color);
     overflow: hidden;
   }
 </style>
@@ -40,9 +49,9 @@
   <title>shiftfoc.us | {project.title}</title>
 </svelte:head>
 
-<section class="info">
+<section class="wrapper">
   <a class="" rel="prefetch" href="/">ᐸ</a>
-  <strong>{project.title}</strong> - {project.summary}
+  <strong>{project.title}</strong>&nbsp;- {project.summary}
 </section>
 
 <iframe src={project.url} title={project.title} frameborder="0"></iframe>
