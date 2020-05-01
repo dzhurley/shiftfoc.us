@@ -54,4 +54,9 @@
   <strong>{project.title}</strong>&nbsp;- {project.summary}
 </section>
 
-<iframe src={project.url} title={project.title} frameborder="0"></iframe>
+<iframe
+  src={project.url}
+  title={project.title}
+  frameborder="0"
+  allow="camera;microphone"
+></iframe>
