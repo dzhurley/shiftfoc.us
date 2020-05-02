@@ -107,18 +107,19 @@
 </script>
 
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, beforeUpdate } from 'svelte';
 
+  let img;
   onMount(() => {
     ctx = canvas.getContext('2d');
     canvasRect = canvas.getBoundingClientRect();
-    points = [];
 
-    const img = new Image();
+    img = new Image();
     img.onload = () => {
       w = canvas.width = img.width;
       h = canvas.height = img.height;
       canvasRect = canvas.getBoundingClientRect();
+      points = [];
 
       ctx.drawImage(img, 0, 0);
       data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -126,7 +127,7 @@
 
       paint();
     };
-    img.src = './me.png';
+    img.src = `./images/${active}.png`;
 
     let frame;
     (function loop() {
@@ -136,6 +137,12 @@
     }());
 
     return () => cancelAnimationFrame(frame);
+  });
+
+  beforeUpdate(() => {
+    if (img && !img.src.endsWith(`${active}.png`)) {
+      img.src = `./images/${active}.png`;
+    }
   });
 
   let canvas;
@@ -181,6 +188,8 @@
 
     hovered = wasWithin;
   }
+
+  export let active;
 </script>
 
 <style>

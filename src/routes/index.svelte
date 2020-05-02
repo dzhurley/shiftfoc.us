@@ -12,6 +12,16 @@
   import Portrait from '../components/Portrait.svelte';
 
   export let projects;
+
+  let active = 'me';
+
+  function handleMouseover(project) {
+    active = project;
+  }
+
+  function handleMouseout() {
+    active = 'me';
+  }
 </script>
 
 <style>
@@ -59,19 +69,31 @@
 </svelte:head>
 
 <section class="portrait">
-  <Portrait />
+  <Portrait active={active} />
 </section>
 
 <section class="intro">
   <h1>Hallo</h1>
 
   <p>
-    Offal 8-bit bitters, echo park mlkshk kale chips succulents pug hashtag subway tile venmo selfies. Thundercats messenger bag fingerstache kickstarter air plant. Neutra fashion axe tousled, next level readymade everyday carry four dollar toast tacos YOLO prism af keytar brunch ugh etsy. Cloud bread everyday carry cliche gentrify edison bulb typewriter, vice raw denim enamel pin pok pok leggings gochujang fixie artisan.
+    Offal 8-bit bitters, echo park mlkshk kale chips succulents pug hashtag
+    subway tile venmo selfies. Thundercats messenger bag fingerstache
+    kickstarter air plant. Neutra fashion axe tousled, next level readymade
+    everyday carry four dollar toast tacos YOLO prism af keytar brunch ugh
+    etsy. Cloud bread everyday carry cliche gentrify edison bulb typewriter,
+    vice raw denim enamel pin pok pok leggings gochujang fixie artisan.
   </p>
 
   <ul class="projects">
     {#each projects as project}
-      <li><a rel='prefetch' href='/{project.slug}'>{project.title}</a></li>
+      <li
+        on:mouseover={() => handleMouseover(project.slug)}
+        on:mouseout={handleMouseout}
+      >
+        <a rel='prefetch' href='/{project.slug}'>
+          {project.title}
+        </a>
+      </li>
     {/each}
   </ul>
 </section>
