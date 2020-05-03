@@ -27,20 +27,32 @@
 <style>
   .intro {
     position: absolute;
-    top: 10vh;
+    top: 50%;
     left: 10vw;
+    transform: translateY(-50%);
     max-width: 40vw;
     pointer-events: none;
   }
 
   .projects {
-    padding: 1rem;
+    margin: 0 -0.5rem;
+    padding: 1rem 0;
     display: grid;
     grid-template-columns: 1fr;
+    list-style: none;
   }
 
   .projects a {
     pointer-events: auto;
+    display: inline-block;
+    padding: 0 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.5s, color 0.5s;
+  }
+
+  .projects a:hover {
+    background-color: var(--light-color);
+    color: var(--dark-color);
   }
 
   @media (min-width: 1000px) {
@@ -54,23 +66,13 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
-
-  .portrait {
-    max-height: 100vh;
-    max-width: 100vh;
-    position: absolute;
-    bottom: -2rem;
-    right: 5vw;
-  }
 </style>
 
 <svelte:head>
   <title>shiftfoc.us</title>
 </svelte:head>
 
-<section class="portrait">
-  <Portrait active={active} />
-</section>
+<Portrait active={active} />
 
 <section class="intro">
   <h1>Hallo</h1>

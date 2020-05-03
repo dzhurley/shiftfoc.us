@@ -1,12 +1,16 @@
-<script context="module">
+<script>
+  import { onMount, beforeUpdate } from 'svelte';
+
   const TWO_PI = Math.PI * 2;
-  const res = 16;
-  const halfRes = res / 2;
   const buffer = 30;
 
   let ctx, canvasRect;
   let points = [];
   let w, h, data;
+
+  let resolution = 16;
+  let img, canvas;
+  let warping = false;
 
   function tweenSize(p) {
     if (p.currentSize < p.size) {
@@ -57,7 +61,7 @@
   };
   const mousedShapes = Object.keys(drawShape).filter(s => s !== 'circle');
 
-  function addPoint(x, y, color) {
+  function addPoint(x, y, color, sizeMultiplier) {
     x += Math.random() - 0.5;
     y += Math.random() - 0.5;
     points.push({
@@ -68,7 +72,7 @@
       color,
       currentSize: 0,
       rate: Math.random() * 0.5 + 0.01,
-      size: Math.random() * halfRes + (halfRes / 2),
+      size: Math.random() * sizeMultiplier + (sizeMultiplier / 2),
       shape: 'circle',
       rotation: Math.random() * TWO_PI,
     });
@@ -81,16 +85,17 @@
     ctx.restore();
   }
 
-  function paint() {
-    const cols = w / res;
-    const rows = h / res;
+  function paint(resolution) {
+    const cols = w / resolution;
+    const rows = h / resolution;
+    const halfRes = resolution / 2;
 
     let x, y, pixelIndex, red, green, blue, alpha;
 
-    for (let row = 0; row < rows - 2; row++) {
-      y = row * res;
+    for (let row = 0; row < rows; row++) {
+      y = row * resolution;
       for (let col = 0; col < cols; col++) {
-        x = col * res;
+        x = col * resolution;
 
         pixelIndex = (x + y * w) * 4;
         red = data[pixelIndex + 0] || 0;
@@ -99,17 +104,13 @@
         alpha = data[pixelIndex + 3] > 0 ? 1 : 0;
 
         if (alpha) {
-          addPoint(x, y, `rgba(${red},${green},${blue},${alpha})`);
+          addPoint(x, y, `rgba(${red},${green},${blue},${alpha})`, halfRes);
         }
       }
     }
   }
-</script>
 
-<script>
-  import { onMount, beforeUpdate } from 'svelte';
-
-  let img;
+  export let active;
   onMount(() => {
     ctx = canvas.getContext('2d');
     canvasRect = canvas.getBoundingClientRect();
@@ -125,7 +126,7 @@
       data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      paint();
+      paint(resolution);
     };
     img.src = `./images/${active}.png`;
 
@@ -141,12 +142,14 @@
 
   beforeUpdate(() => {
     if (img && !img.src.endsWith(`${active}.png`)) {
+      if (active !== 'me') {
+        resolution *= 2;
+      } else {
+        resolution /= 2;
+      }
       img.src = `./images/${active}.png`;
     }
   });
-
-  let canvas;
-  let hovered = false;
 
   function handleResize() {
     canvasRect = canvas.getBoundingClientRect();
@@ -178,7 +181,7 @@
           p.shape = mousedShapes[index];
         }
       } else {
-        hovered = false;
+        warping = false;
         p.x = p.xOrig;
         p.y = p.yOrig;
         p.rotation = Math.random() * TWO_PI;
@@ -186,27 +189,47 @@
       }
     }
 
-    hovered = wasWithin;
+    warping = wasWithin;
   }
-
-  export let active;
 </script>
 
 <style>
-  canvas {
-    max-width: 100%;
-    max-height: 100%;
+  .portrait {
+    max-height: 100vh;
+    max-width: 100vh;
+    position: absolute;
+    bottom: -2rem;
+    right: 5vw;
   }
 
   .hovered {
+    bottom: -2rem;
+    right: 5vw;
+    transform: translate(35%, calc(-50% + 2rem));
+  }
+
+  canvas {
+    max-width: var(--dimensions);
+    max-height: var(--dimensions);
+  }
+
+  .warping {
     cursor: pointer;
+  }
+
+  .project {
+    outline: 1px solid var(--light-color);
   }
 </style>
 
 <svelte:window on:resize={handleResize} />
 
-<canvas
-  bind:this={canvas}
-  on:mousemove={handleMousemove}
-  class="{hovered ? 'hovered' : ''}"
-></canvas>
+<section class="portrait" class:hovered={active !== 'me'}>
+  <canvas
+    bind:this={canvas}
+    on:mousemove={handleMousemove}
+    style="--dimensions: {active !== 'me' ? '60%' : '100%'}"
+    class:warping
+    class:project={active !== 'me'}
+  ></canvas>
+</section>
