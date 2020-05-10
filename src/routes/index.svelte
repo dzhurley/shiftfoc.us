@@ -1,10 +1,8 @@
 <script context="module">
-  export function preload() {
-    return this.fetch('index.json')
-      .then(r => r.json())
-      .then(projects => {
-        return { projects };
-      });
+  export async function preload() {
+    const res = await this.fetch('index.json');
+    const data = await res.json();
+    return data;
   }
 </script>
 
@@ -12,6 +10,7 @@
   import Portrait from '../components/Portrait.svelte';
 
   export let projects;
+  export let track;
 
   let active = 'me';
 
@@ -34,37 +33,34 @@
     pointer-events: none;
   }
 
-  .projects {
-    margin: 0 -0.5rem;
-    padding: 1rem 0;
-    display: grid;
-    grid-template-columns: 1fr;
+  ul {
+    padding: 0;
     list-style: none;
   }
 
-  .projects a {
+  li {
+    display: inline-block;
+  }
+
+  a {
     pointer-events: auto;
     display: inline-block;
-    padding: 0 0.5rem;
-    text-decoration: none;
+    padding: 0 0.35rem;
+    margin: 0 -0.35rem;
     transition: background-color 0.5s, color 0.5s;
   }
 
-  .projects a:hover {
+  a:hover {
     background-color: var(--light-color);
     color: var(--dark-color);
   }
 
-  @media (min-width: 1000px) {
-    .projects {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .spacer {
+    margin-right: 0.5rem;
   }
 
-  @media (min-width: 1400px) {
-    .projects {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  li:last-of-type .spacer {
+    display: none;
   }
 </style>
 
@@ -75,16 +71,13 @@
 <Portrait active={active} />
 
 <section class="intro">
-  <h1>Hallo</h1>
+  <h1>Hello!</h1>
 
   <p>
-    Offal 8-bit bitters, echo park mlkshk kale chips succulents pug hashtag
-    subway tile venmo selfies. Thundercats messenger bag fingerstache
-    kickstarter air plant. Neutra fashion axe tousled, next level readymade
-    everyday carry four dollar toast tacos YOLO prism af keytar brunch ugh
-    etsy. Cloud bread everyday carry cliche gentrify edison bulb typewriter,
-    vice raw denim enamel pin pok pok leggings gochujang fixie artisan.
+    I'm Derek Hurley, a UI engineer at <a href="https://aclima.io/" target="_blank" rel="noopener noreferrer">Aclima</a> from the Pacific Northwest. I enjoy (a lot of) tea, outdoor adventures, corny jokes, and discovering new music. In fact, I last listened to <a href={track.url} target="_blank" rel="noopener noreferrer">{track.song} by {track.artist}</a>. Here you'll find some of my projects, I hope take a look around.
   </p>
+
+  <h3>Projects</h3>
 
   <ul class="projects">
     {#each projects as project}
@@ -95,6 +88,7 @@
         <a rel='prefetch' href='/{project.slug}'>
           {project.title}
         </a>
+        <span class="spacer">/</span>
       </li>
     {/each}
   </ul>

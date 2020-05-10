@@ -203,8 +203,6 @@
   }
 
   .hovered {
-    bottom: -2rem;
-    right: 5vw;
     transform: translate(35%, calc(-50% + 2rem));
   }
 
