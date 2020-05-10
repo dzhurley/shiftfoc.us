@@ -1,11 +1,27 @@
 @font-face{
-  font-family: 'DejaVuSansMono';
-  src: url('./DejaVuSansMono.ttf');
+    font-family: 'DejaVuSansMono';
+    src: url('./DejaVuSansMono.ttf');
 }
 
 :root {
-    --light-color: #D7D7D7;
-    --dark-color: #272727;
+    --darkest: #002b36;
+    --darker: #073642;
+    --dark: #586e75;
+    --darkish: #657b83;
+
+    --lightish: #839496;
+    --light: #93a1a1;
+    --lighter: #eee8d5;
+    --lightest: #fdf6e3;
+
+    --yellow: #b58900;
+    --orange: #cb4b16;
+    --red: #dc322f;
+    --magenta: #d33682;
+    --violet: #6c71c4;
+    --blue: #268bd2;
+    --cyan: #2aa198;
+    --green: #859900;
 }
 
 body {
@@ -13,11 +29,31 @@ body {
     font-family: 'DejaVuSansMono', Helvetica Neue, sans-serif;
     font-size: 14px;
     line-height: 2;
-    color: var(--light-color);
-    background-color: var(--dark-color);
     overflow: hidden;
+
+    background-color: var(--darkest);
+    color: var(--lightish);
+
+}
+
+h1, h3 {
+    color: var(--red);
 }
 
 a {
-    color: var(--light-color);
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+a, a:active, a:visited {
+    color: var(--green);
+    padding: 0.35rem;
+    margin: 0 -0.35rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.5s;
+}
+
+a:hover {
+    background-color: var(--lightest);
 }

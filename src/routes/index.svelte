@@ -44,15 +44,6 @@
 
   a {
     pointer-events: auto;
-    display: inline-block;
-    padding: 0 0.35rem;
-    margin: 0 -0.35rem;
-    transition: background-color 0.5s, color 0.5s;
-  }
-
-  a:hover {
-    background-color: var(--light-color);
-    color: var(--dark-color);
   }
 
   .spacer {
@@ -74,7 +65,7 @@
   <h1>Hello!</h1>
 
   <p>
-    I'm Derek Hurley, a UI engineer at <a href="https://aclima.io/" target="_blank" rel="noopener noreferrer">Aclima</a> from the Pacific Northwest. I enjoy (a lot of) tea, outdoor adventures, corny jokes, and discovering new music. In fact, I last listened to <a href={track.url} target="_blank" rel="noopener noreferrer">{track.song} by {track.artist}</a>. Here you'll find some of my projects, I hope take a look around.
+    I'm Derek Hurley, a UI engineer at <a href="https://aclima.io/" target="_blank" rel="noopener noreferrer">Aclima</a> from the Pacific Northwest. I enjoy (a lot of) tea, outdoor adventures, corny jokes, and discovering new music. I last listened to <a href={track.url} target="_blank" rel="noopener noreferrer">{track.title}</a> actually, you should check them out. I hope you'll take a look around my site, all my projects are <a href="https://github.com/dzhurley" target="_blank" rel="noopener noreferrer">open source</a> so feel encouraged to modify them as you want.
   </p>
 
   <h3>Projects</h3>

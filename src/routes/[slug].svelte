@@ -23,7 +23,7 @@
     top: 0;
     left: 3rem;
     height: 6rem;
-    background-color: var(--dark-color);
+    background-color: var(--darkest);
     display:flex;
     align-items: center;
   }
@@ -40,7 +40,7 @@
     transform: translateX(-50%);
     width: calc(100vw - 6rem);
     height: calc(100vh - 9rem);
-    border: 1px solid var(--light-color);
+    border: 1px solid var(--lightish);
     overflow: hidden;
   }
 </style>

@@ -216,7 +216,8 @@
   }
 
   .project {
-    outline: 1px solid var(--light-color);
+    border: 2px solid var(--lightish);
+    border-radius: 0.5rem;
   }
 </style>
 

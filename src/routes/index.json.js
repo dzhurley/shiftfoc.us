@@ -20,8 +20,7 @@ export async function get(req, res) {
         };
       }),
       track: {
-        artist: lastData.recenttracks.track[0].artist['#text'],
-        song: lastData.recenttracks.track[0].name,
+        title: `${lastData.recenttracks.track[0].name} by ${lastData.recenttracks.track[0].artist['#text']}`,
         url: lastData.recenttracks.track[0].url,
       },
     }),
