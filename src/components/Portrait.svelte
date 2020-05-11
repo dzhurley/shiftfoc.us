@@ -197,13 +197,13 @@
   .portrait {
     max-height: 100vh;
     max-width: 100vh;
-    position: absolute;
-    bottom: -2rem;
-    right: 5vw;
+    position: fixed;
+    bottom: 0;
+    right: 2vw;
   }
 
   .hovered {
-    transform: translate(35%, calc(-50% + 2rem));
+    transform: translate(35%, -50%);
   }
 
   canvas {
@@ -227,7 +227,7 @@
   <canvas
     bind:this={canvas}
     on:mousemove={handleMousemove}
-    style="--dimensions: {active !== 'me' ? '60%' : '100%'}"
+    style="--dimensions: {active !== 'me' ? '50%' : '100%'}"
     class:warping
     class:project={active !== 'me'}
   ></canvas>
