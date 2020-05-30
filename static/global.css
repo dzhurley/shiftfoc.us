@@ -35,7 +35,7 @@ body {
 
 }
 
-h1, h3 {
+h1 {
     color: var(--red);
 }
 
@@ -65,20 +65,21 @@ a:hover {
 @media (min-width: 1200px) {
     .wrapper {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 10vw;
+        transform: translateY(-50%);
     }
 
     .intro {
-        margin: 8vw;
+        margin: 0;
         padding: 0;
-        max-width: 42vw;
+        max-width: 40vw;
         pointer-events: none;
     }
 }
 
 ul {
-    padding: 0;
+    padding: 1rem;
     list-style: none;
 }
 
