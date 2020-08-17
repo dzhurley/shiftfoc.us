@@ -173,27 +173,4 @@ canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   canvas.classList.toggle('warping', wasWithin);
 });
 
-function handleHover(project) {
-  const active = project || 'me';
-  if (img && !img.src.endsWith(`${active}.png`)) {
-    if (active !== 'me') {
-      resolution *= 2;
-      canvas.classList.toggle('project', true);
-    } else {
-      resolution /= 2;
-      canvas.classList.toggle('project', false);
-    }
-    img.src = `static/images/${active}.png`;
-  }
-}
-
-Array.from(document.querySelectorAll('.projects li')).map(p => {
-  p.addEventListener('mouseover', function projectMouseOver(evt) {
-    handleHover(evt.target.innerText.replace(/ /g, '-'));
-  });
-  p.addEventListener('mouseout', function projectMouseOut(evt) {
-    handleHover('me');
-  })
-});
-
 loop();

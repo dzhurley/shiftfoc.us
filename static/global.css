@@ -27,15 +27,33 @@
 body {
     margin: 0;
     font-family: 'DejaVuSansMono', Helvetica Neue, sans-serif;
-    font-size: 1rem;
+    font-size: 15px;
     line-height: 2;
 
     background-color: var(--darkest);
     color: var(--lightish);
 }
 
-h1 {
-    color: var(--red);
+.main {
+    position: absolute;
+    display: grid;
+    grid-template-areas:
+        "title title"
+        "intro intro"
+        "projects project";
+    grid-template-rows: repeat(2, max-content) 18rem;
+    grid-template-columns: max-content 1fr;
+    column-gap: 2rem;
+}
+
+.title {
+    color: var(--orange);
+    grid-area: title;
+}
+
+.intro {
+    grid-area: intro;
+    padding-bottom: 2rem;
 }
 
 a {
@@ -57,41 +75,32 @@ a:hover {
     background-color: var(--lightest);
 }
 
-.wrapper {
-    padding: 0 0.75rem;
-}
-
-@media (min-width: 1200px) {
-    .wrapper {
-        position: absolute;
-        top: 50%;
-        left: 10vw;
-        transform: translateY(-50%);
-    }
-
-    .intro {
-        margin: 0;
-        padding: 0;
-        max-width: 40vw;
-        pointer-events: none;
-    }
-}
-
-ul {
-    padding: 1rem;
+.projects {
+    grid-area: projects;
+    margin: 0;
+    padding: 0.5rem 1rem;;
     list-style: none;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    border-radius: 0.5rem;
+    border: 1px solid var(--lightish);
+    width: max-content;
 }
 
-li {
-    display: inline;
+.projects li {
+    scroll-snap-align: center;
 }
 
-.spacer {
-    margin: 0 0.5rem;
+.projects li a {
+    display: block;
 }
 
-li:last-of-type .spacer {
-    display: none;
+.project {
+    grid-area: project;
+}
+
+.project img {
+    max-height: 14rem;
 }
 
 .portrait {
@@ -111,10 +120,21 @@ canvas {
     cursor: pointer;
 }
 
-.project {
-    border: 2px solid var(--lightish);
-    border-radius: 0.5rem;
-    max-width: 50%;
-    max-height: 50%;
-    transform: translate(50%, -50%);
+@media (min-width: 1000px) {
+    body {
+        font-size: 18px;
+    }
+
+    .main {
+        max-width: 40vw;
+        top: 10vh;
+        left: 10vw;
+    }
+}
+
+@media (min-width: 1440px) {
+    .main {
+        top: 20vh;
+        left: 10vw;
+    }
 }
