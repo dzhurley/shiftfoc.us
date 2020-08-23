@@ -64,11 +64,11 @@ a {
 
 a, a:active, a:visited {
     color: var(--green);
+    pointer-events: auto;
+    transition: background-color 0.5s;
     padding: 0.35rem;
     margin: 0 -0.35rem;
     border-radius: 0.5rem;
-    transition: background-color 0.5s;
-    pointer-events: auto;
 }
 
 a:hover {
@@ -78,7 +78,7 @@ a:hover {
 .projects {
     grid-area: projects;
     margin: 0;
-    padding: 0.5rem 1rem;;
+    padding: 0.5rem 0;
     list-style: none;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
@@ -92,15 +92,33 @@ a:hover {
 }
 
 .projects li a {
+    margin: 0;
+    padding: 0 1rem;
+    border-radius: 0;
     display: block;
 }
 
 .project {
     grid-area: project;
+    display: grid;
+    grid-template-rows: 1rem min-content;
+    grid-template-areas:
+        "links photo"
+        "desc photo";
+    gap: 1rem;
 }
 
 .project img {
+    grid-area: photo;
     max-height: 14rem;
+}
+
+.project span {
+    grid-area: links;
+}
+
+.project p {
+    grid-area: desc;
 }
 
 .portrait {
@@ -128,13 +146,6 @@ canvas {
     .main {
         max-width: 40vw;
         top: 10vh;
-        left: 10vw;
-    }
-}
-
-@media (min-width: 1440px) {
-    .main {
-        top: 20vh;
         left: 10vw;
     }
 }
