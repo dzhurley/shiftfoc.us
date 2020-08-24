@@ -25,35 +25,17 @@
 }
 
 body {
-    margin: 0;
+    margin: 0 1.5rem;
     font-family: 'DejaVuSansMono', Helvetica Neue, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 2;
 
     background-color: var(--darkest);
     color: var(--lightish);
 }
 
-.main {
-    position: absolute;
-    display: grid;
-    grid-template-areas:
-        "title title"
-        "intro intro"
-        "projects project";
-    grid-template-rows: repeat(2, max-content) 18rem;
-    grid-template-columns: max-content 1fr;
-    column-gap: 2rem;
-}
-
 .title {
     color: var(--orange);
-    grid-area: title;
-}
-
-.intro {
-    grid-area: intro;
-    padding-bottom: 2rem;
 }
 
 a {
@@ -69,6 +51,7 @@ a, a:active, a:visited {
     padding: 0.35rem;
     margin: 0 -0.35rem;
     border-radius: 0.5rem;
+    outline: none;
 }
 
 a:hover {
@@ -76,60 +59,35 @@ a:hover {
 }
 
 .projects {
-    grid-area: projects;
-    margin: 0;
-    padding: 0.5rem 0;
+    margin: 0 -0.5rem 1rem;
+    padding: 0 0.5rem;
     list-style: none;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    border-radius: 0.5rem;
-    border: 1px solid var(--lightish);
-    width: max-content;
 }
 
-.projects li {
-    scroll-snap-align: center;
-}
-
-.projects li a {
-    margin: 0;
-    padding: 0 1rem;
-    border-radius: 0;
+.projects:before {
+    content: '***';
     display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-.project {
-    grid-area: project;
-    display: grid;
-    grid-template-rows: 1rem min-content;
-    grid-template-areas:
-        "links photo"
-        "desc photo";
-    gap: 1rem;
-}
-
-.project img {
-    grid-area: photo;
-    max-height: 14rem;
-}
-
-.project span {
-    grid-area: links;
-}
-
-.project p {
-    grid-area: desc;
+.spacer {
+    margin: 0 0.25rem;
+    color: var(--yellow);
 }
 
 .portrait {
     max-height: 100vh;
-    max-width: 100vh;
+    max-width: 100vw;
     position: fixed;
     bottom: 0;
     right: 2vw;
 }
 
 canvas {
+    display: none;
     max-width: 100%;
     max-height: 100%;
 }
@@ -144,8 +102,13 @@ canvas {
     }
 
     .main {
+        position: absolute;
         max-width: 40vw;
-        top: 10vh;
+        top: 20vh;
         left: 10vw;
+    }
+
+    canvas {
+        display: block;
     }
 }

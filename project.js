@@ -1,3 +1,5 @@
+let activeProject;
+
 const setProject = (name, href, desc) => {
   const id = href.split('/').reduce((name, part) => part);
   document.querySelector('.project').innerHTML = `
@@ -13,10 +15,10 @@ const setProject = (name, href, desc) => {
 
 document.querySelector('.projects').addEventListener('click', evt => {
   evt.preventDefault();
-  setProject(
-    evt.target.textContent,
-    evt.target.href,
-    evt.target.parentNode.title,
-  );
+  const { textContent, href, parentNode } = evt.target;
+  if (activeProject !== textContent) {
+    setProject(textContent, href, parentNode.title);
+    activeProject = textContent;
+  }
   return false;
 });

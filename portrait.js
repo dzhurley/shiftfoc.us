@@ -123,7 +123,7 @@ img.onload = () => {
 
   paint(resolution);
 };
-img.src = 'static/images/me.png';
+img.src = 'static/me.png';
 
 function loop() {
   requestAnimationFrame(loop);
