@@ -83,16 +83,25 @@ a:hover {
     color: var(--yellow);
 }
 
-.portrait {
+.portrait, .dots {
     height: 100vh;
     max-width: 100vw;
     position: fixed;
+    z-index: -1;
+}
+
+.portrait {
     bottom: 0;
     right: 2vw;
+    display: none;
+}
+
+.dots {
+    top: 0;
+    left: 0;
 }
 
 canvas {
-    display: none;
     max-width: 100%;
     max-height: 100%;
 }
@@ -116,10 +125,11 @@ canvas {
 
     .portrait {
         right: -8vw;
+        display: block;
     }
 
-    canvas {
-        display: block;
+    .dots {
+        display: none;
     }
 }
 
