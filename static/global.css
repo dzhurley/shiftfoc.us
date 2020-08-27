@@ -1,6 +1,7 @@
 @font-face{
     font-family: 'DejaVuSansMono';
-    src: url('./DejaVuSansMono.ttf');
+    font-display: swap;
+    src: url('./DejaVuSansMono.woff2');
 }
 
 :root {
@@ -16,7 +17,7 @@
 
 body {
     margin: 0 1.5rem;
-    font-family: 'DejaVuSansMono', Helvetica Neue, sans-serif;
+    font-family: 'DejaVuSansMono', Monaco, monospace;
     font-size: 14px;
     line-height: 2;
 
