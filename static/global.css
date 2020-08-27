@@ -5,22 +5,12 @@
 
 :root {
     --darkest: #002b36;
-    --darker: #073642;
-    --dark: #586e75;
-    --darkish: #657b83;
 
     --lightish: #839496;
-    --light: #93a1a1;
-    --lighter: #eee8d5;
     --lightest: #fdf6e3;
 
     --yellow: #b58900;
     --orange: #cb4b16;
-    --red: #dc322f;
-    --magenta: #d33682;
-    --violet: #6c71c4;
-    --blue: #268bd2;
-    --cyan: #2aa198;
     --green: #859900;
 }
 
@@ -44,7 +34,6 @@ body {
 }
 
 a {
-    text-decoration: none;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
 }
@@ -59,8 +48,14 @@ a, a:active, a:visited {
     outline: none;
 }
 
-a:hover {
-    background-color: var(--lightest);
+@media (hover: hover) {
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        background-color: var(--lightest);
+    }
 }
 
 .projects {
