@@ -203,3 +203,5 @@ img.onload = () => {
   paint();
 };
 img.src = 'static/me.png';
+
+console.log('Well hello, nice to see you here as well');
