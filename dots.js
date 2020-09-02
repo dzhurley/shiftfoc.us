@@ -112,7 +112,7 @@ window.addEventListener('resize', () => {
   portraitRect = portraitCanvas.getBoundingClientRect();
 });
 
-portraitCanvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
+portraitCanvas.addEventListener('pointermove', ({ offsetX, offsetY }) => {
   const x = (offsetX / portraitRect.width) * portraitCanvas.width;
   const y = (offsetY / portraitRect.height) * portraitCanvas.height;
   let wasWithin = false;
@@ -147,6 +147,17 @@ portraitCanvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   }
 
   portraitCanvas.classList.toggle('warping', wasWithin);
+});
+
+portraitCanvas.addEventListener('pointerup', () => {
+  for (let i = 0; i < portraitPoints.length; i++) {
+    const p = portraitPoints[i];
+    portraitCanvas.classList.toggle('warping', false);
+    p.x = p.xOrig;
+    p.y = p.yOrig;
+    p.rotation = Math.random() * TWO_PI;
+    p.shape = 'circle';
+  }
 });
 
 const loop = () => {
