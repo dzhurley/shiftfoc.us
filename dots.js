@@ -1,8 +1,9 @@
 const TWO_PI = Math.PI * 2;
 const portraitBuffer = 30;
 
-const portraitPoints = [];
-const dots = [];
+let isMobile = window.innerWidth < 1000;
+
+let portraitPoints = [];
 let imgData;
 
 const portraitCanvas = document.querySelector('.portrait canvas');
@@ -82,8 +83,7 @@ const drawPoint = p => {
   portraitCtx.restore();
 };
 
-const paint = () => {
-  const resolution = 16;
+const paint = resolution => {
   const cols = portraitCanvas.width / resolution;
   const rows = portraitCanvas.height / resolution;
   const halfRes = resolution / 2;
@@ -110,9 +110,24 @@ const paint = () => {
 
 window.addEventListener('resize', () => {
   portraitRect = portraitCanvas.getBoundingClientRect();
+
+  if (window.innerWidth < 1000 && !isMobile) {
+    portraitPoints = [];
+    portraitCtx.clearRect(0, 0, portraitCanvas.width, portraitCanvas.height);
+    paint(32);
+    isMobile = true;
+  } else if (window.innerWidth >= 1000 && isMobile) {
+    portraitPoints = [];
+    portraitCtx.clearRect(0, 0, portraitCanvas.width, portraitCanvas.height);
+    paint(16);
+    isMobile = false;
+  }
 });
 
-portraitCanvas.addEventListener('pointermove', ({ offsetX, offsetY }) => {
+portraitCanvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
+  if (isMobile) {
+    return false;
+  }
   const x = (offsetX / portraitRect.width) * portraitCanvas.width;
   const y = (offsetY / portraitRect.height) * portraitCanvas.height;
   let wasWithin = false;
@@ -149,17 +164,6 @@ portraitCanvas.addEventListener('pointermove', ({ offsetX, offsetY }) => {
   portraitCanvas.classList.toggle('warping', wasWithin);
 });
 
-portraitCanvas.addEventListener('pointerup', () => {
-  for (let i = 0; i < portraitPoints.length; i++) {
-    const p = portraitPoints[i];
-    portraitCanvas.classList.toggle('warping', false);
-    p.x = p.xOrig;
-    p.y = p.yOrig;
-    p.rotation = Math.random() * TWO_PI;
-    p.shape = 'circle';
-  }
-});
-
 const loop = () => {
   requestAnimationFrame(loop);
   portraitCtx.clearRect(0, 0, portraitCanvas.width, portraitCanvas.height);
@@ -182,7 +186,7 @@ img.onload = () => {
   ).data;
   portraitCtx.clearRect(0, 0, portraitCanvas.width, portraitCanvas.height);
 
-  paint();
+  paint(isMobile ? 32 : 16);
 };
 img.src = 'static/me.png';
 

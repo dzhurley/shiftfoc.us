@@ -88,15 +88,15 @@ a, a:active, a:visited {
     flex-grow: 1;
     position: relative;
     overflow: hidden;
-    min-height: 9rem;
+    min-height: 18rem;
 }
 
 canvas {
     max-width: 18rem;
     position: absolute;
-    bottom: -10rem;
+    bottom: -1rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-60%);
 }
 
 .warping {
