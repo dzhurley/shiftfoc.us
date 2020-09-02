@@ -188,6 +188,6 @@ img.onload = () => {
 
   paint(isMobile ? 32 : 16);
 };
-img.src = 'static/me.png';
+img.src = 'assets/me.png';
 
 console.log('Well hello, nice to see you here as well');

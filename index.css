@@ -1,7 +1,7 @@
 @font-face{
     font-family: 'DejaVuSansMono';
     font-display: swap;
-    src: url('./DejaVuSansMono.woff2');
+    src: url('./assets/DejaVuSansMono.woff2');
 }
 
 :root {
