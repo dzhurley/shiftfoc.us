@@ -9,12 +9,6 @@ const portraitCanvas = document.querySelector('.portrait canvas');
 let portraitCtx = portraitCanvas.getContext('2d');
 let portraitRect = portraitCanvas.getBoundingClientRect();
 
-const dotsCanvas = document.querySelector('.dots canvas');
-let dotsCtx = dotsCanvas.getContext('2d');
-dotsCanvas.width = window.innerWidth;
-dotsCanvas.height = window.innerHeight;
-let dotsRect = dotsCanvas.getBoundingClientRect();
-
 const tweenSize = p => {
   if (p.currentSize < p.size) {
     p.currentSize += p.rate;
@@ -114,36 +108,8 @@ const paint = () => {
   }
 };
 
-const dotsColors = [
-  'rgba(132, 50, 55, 0.15)',
-  'rgba(226, 195, 178, 0.15)',
-  'rgba(59, 110, 181, 0.15)',
-  'rgba(232, 181, 93, 0.15)',
-  'rgba(34, 32, 48, 0.15)',
-];
-const drawDots = () => {
-  for (let i = 0; i < Math.random() * 50 + 50; i++) {
-    dotsCtx.fillStyle = dotsColors[Math.round(Math.random() * (dotsColors.length - 1))]
-    dotsCtx.beginPath();
-    dotsCtx.arc(
-      Math.random() * window.innerWidth,
-      Math.random() * window.innerHeight,
-      10,
-      0,
-      TWO_PI,
-      true,
-    );
-    dotsCtx.fill();
-  }
-};
-drawDots();
-
 window.addEventListener('resize', () => {
   portraitRect = portraitCanvas.getBoundingClientRect();
-  dotsCanvas.width = window.innerWidth;
-  dotsCanvas.height = window.innerHeight;
-  dotsRect = dotsCanvas.getBoundingClientRect();
-  drawDots();
 });
 
 portraitCanvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
@@ -197,7 +163,12 @@ img.onload = () => {
   portraitRect = portraitCanvas.getBoundingClientRect();
 
   portraitCtx.drawImage(img, 0, 0);
-  imgData = portraitCtx.getImageData(0, 0, portraitCanvas.width, portraitCanvas.height).data;
+  imgData = portraitCtx.getImageData(
+    0,
+    0,
+    portraitCanvas.width,
+    portraitCanvas.height,
+  ).data;
   portraitCtx.clearRect(0, 0, portraitCanvas.width, portraitCanvas.height);
 
   paint();
