@@ -38,9 +38,18 @@ body {
     color: var(--orange);
 }
 
+.intro:after {
+    content: '***';
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
 a {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
+    background-color: var(--darkest);
 }
 
 a, a:active, a:visited {
@@ -64,23 +73,87 @@ a, a:active, a:visited {
 }
 
 .projects {
-    margin: 0 -0.5rem 1rem;
-    padding: 0 0.5rem;
+    margin: 0 0 1rem;
+    padding: 1.5rem 0;
     list-style: none;
-    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 0;
 }
 
-.projects:before {
-    content: '***';
-    display: block;
-    width: 100%;
-    margin-bottom: 0.5rem;
+.timeline {
+    position: absolute;
+    width: 0px;
+    height: 100%;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: 0.5px solid var(--lightish);
+    z-index: -1;
+}
+
+.project {
+    min-height: 6rem;
+    overflow: visible;
+    position: relative;
+    pointer-events: none;
+}
+
+.project img {
+    position: absolute;
+    top: -1.5rem;
+    height: 8.5rem;
+    cursor: pointer;
+    z-index: -1;
+}
+
+.project:nth-of-type(2n + 1) {
+    text-align: left;
+}
+.project:nth-of-type(2n + 1):before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--lightest);
+    border-radius: 50%;
+    background-color: var(--lightest);
+    margin-left: calc(50% - 0.25rem - 1px);
+}
+
+.project:nth-of-type(2n + 1) a {
+    padding-left: 0.85rem;
+    margin-left: -0.85rem;
+}
+
+.project:nth-of-type(2n + 1) img {
+    left: calc(50% + 3rem);
+}
+
+.project:nth-of-type(2n) {
+    text-align: right;
+}
+.project:nth-of-type(2n):after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--lightest);
+    border-radius: 50%;
+    background-color: var(--lightest);
+    margin-right: calc(50% - 0.25rem - 1px);
+}
+
+.project:nth-of-type(2n) img {
+    right: calc(50% + 3rem);
+}
+
+.made-with {
+    display: none;
     text-align: center;
-}
-
-.spacer {
-    margin: 0 0.25rem;
-    color: var(--yellow);
+    margin-bottom: 3rem;
 }
 
 .portrait {
@@ -115,6 +188,10 @@ canvas {
         margin: 0;
         max-width: 460px;
         min-height: initial;
+    }
+
+    .made-with {
+        display: block;
     }
 
     .portrait {
