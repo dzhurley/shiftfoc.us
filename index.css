@@ -62,16 +62,6 @@ a, a:active, a:visited {
     outline: none;
 }
 
-@media (hover: hover) {
-    a {
-        text-decoration: none;
-    }
-
-    a:hover {
-        background-color: var(--lightest);
-    }
-}
-
 .projects {
     margin: 0 0 1rem;
     padding: 1.5rem 0;
@@ -97,6 +87,12 @@ a, a:active, a:visited {
     overflow: visible;
     position: relative;
     pointer-events: none;
+}
+
+.project a {
+    text-decoration: none;
+    border: 1px solid var(--lightish);
+    transition: background-color 0.5s, border-color 0.5s;
 }
 
 .project img {
@@ -128,7 +124,7 @@ a, a:active, a:visited {
 }
 
 .project:nth-of-type(2n + 1) img {
-    left: calc(50% + 3rem);
+    left: calc(50% + 1.5rem);
 }
 
 .project:nth-of-type(2n) {
@@ -147,7 +143,7 @@ a, a:active, a:visited {
 }
 
 .project:nth-of-type(2n) img {
-    right: calc(50% + 3rem);
+    right: calc(50% + 1.5rem);
 }
 
 .made-with {
@@ -176,6 +172,20 @@ canvas {
     cursor: pointer;
 }
 
+@media (hover: hover) {
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        background-color: var(--lightest);
+    }
+
+    .project a:hover {
+        border-color: var(--lightest);
+    }
+}
+
 @media (min-width: 1000px) {
     body {
         font-size: 16px;
@@ -192,6 +202,14 @@ canvas {
 
     .made-with {
         display: block;
+    }
+
+    .project:nth-of-type(2n + 1) img {
+        left: calc(50% + 3rem);
+    }
+
+    .project:nth-of-type(2n) img {
+        right: calc(50% + 3rem);
     }
 
     .portrait {
